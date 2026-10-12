@@ -1,0 +1,409 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Alwynds Website Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column (max 760px) — header, stat strip, strengths, prioritized issue list with per-viewer checkboxes, suggestions, questions */
+:root {
+  --bg: #f6f7f8;
+  --surface: #ffffff;
+  --fg: #1b232c;
+  --muted: #5a6672;
+  --line: #dde2e7;
+  --accent: #1d5c7a;
+  --accent-soft: #e3eef4;
+  --high: #b23b2e;
+  --high-soft: #f8e6e3;
+  --med: #9a6a0b;
+  --med-soft: #f7efdc;
+  --low: #4b6070;
+  --low-soft: #e9eef2;
+  --good: #2d7a4f;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12171c; --surface: #1a2128; --fg: #e4e9ee; --muted: #9aa7b3; --line: #2c3640;
+    --accent: #7cc0df; --accent-soft: #1d3340;
+    --high: #f08a7c; --high-soft: #3a2220; --med: #e3b65a; --med-soft: #352b16;
+    --low: #a9bccb; --low-soft: #232d36; --good: #7fcf9f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12171c; --surface: #1a2128; --fg: #e4e9ee; --muted: #9aa7b3; --line: #2c3640;
+  --accent: #7cc0df; --accent-soft: #1d3340;
+  --high: #f08a7c; --high-soft: #3a2220; --med: #e3b65a; --med-soft: #352b16;
+  --low: #a9bccb; --low-soft: #232d36; --good: #7fcf9f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; display: grid; gap: 48px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; line-height: 1.15; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 2.75rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.5rem; font-weight: 700; }
+h3 { font-size: 1.05rem; font-weight: 600; font-family: var(--font-body); }
+p { margin: 0; }
+code, .mono { font-family: var(--font-mono); font-size: 0.86em; }
+code { background: var(--accent-soft); color: var(--fg); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+.eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); font-weight: 600; }
+.muted { color: var(--muted); }
+
+header { display: grid; gap: 14px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 0.9rem; color: var(--muted); }
+.scope { display: grid; gap: 8px; font-size: 0.92rem; border-top: 1px solid var(--line); padding-top: 16px; }
+.scope div { display: grid; grid-template-columns: 9.5rem 1fr; gap: 12px; }
+.scope dt { font-weight: 600; color: var(--muted); }
+.scope dd { margin: 0; min-width: 0; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--line); border-radius: 10px; background: var(--surface); overflow: hidden; }
+.stat { padding: 16px; display: grid; gap: 2px; border-left: 1px solid var(--line); }
+.stat:first-child { border-left: 0; }
+.stat b { font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 0.82rem; color: var(--muted); line-height: 1.35; }
+
+section { display: grid; gap: 18px; }
+.list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.strengths li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; }
+.strengths li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--good); margin-top: 9px; margin-left: 4px; }
+
+.progress { display: flex; align-items: center; gap: 12px; font-size: 0.88rem; color: var(--muted); flex-wrap: wrap; }
+.bar { flex: 1; min-width: 140px; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--good); transition: width .25s; }
+
+.group { display: grid; gap: 10px; }
+.group-head { display: flex; align-items: center; gap: 10px; }
+.pill { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 99px; }
+.pill.high { background: var(--high-soft); color: var(--high); }
+.pill.med { background: var(--med-soft); color: var(--med); }
+.pill.low { background: var(--low-soft); color: var(--low); }
+
+.issue { display: grid; grid-template-columns: 2.2rem 1fr auto; gap: 12px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.issue .n { font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); padding-top: 2px; font-variant-numeric: tabular-nums; }
+.issue .body { min-width: 0; display: grid; gap: 6px; }
+.issue .body p, .issue .body ul { font-size: 0.94rem; color: var(--muted); }
+.issue .body ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 3px; }
+.issue[data-sev="high"] { border-left: 3px solid var(--high); }
+.issue[data-sev="med"] { border-left: 3px solid var(--med); }
+.issue[data-sev="low"] { border-left: 3px solid var(--low); }
+.done { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--muted); cursor: pointer; white-space: nowrap; padding-top: 2px; }
+.done input { width: 16px; height: 16px; accent-color: var(--good); cursor: pointer; margin: 0; }
+.issue.is-done { opacity: 0.55; }
+.issue.is-done h3 { text-decoration: line-through; text-decoration-color: var(--muted); }
+input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.suggest li { padding-left: 16px; border-left: 2px solid var(--accent); }
+.questions { counter-reset: q; }
+.questions li { counter-increment: q; display: grid; grid-template-columns: 2rem 1fr; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.questions li:last-child { border-bottom: 0; padding-bottom: 0; }
+.questions li::before { content: "Q" counter(q); font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); padding-top: 2px; }
+
+footer { font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; display: grid; gap: 4px; }
+
+@media (max-width: 600px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(3) { border-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .scope div { grid-template-columns: 1fr; gap: 0; }
+  .issue { grid-template-columns: 1.8rem 1fr; }
+  .done { grid-column: 2; }
+}
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Website review</div>
+    <h1>alwynds.com: findings for the owner</h1>
+    <div class="meta">
+      <span>Reviewed October 11, 2026</span>
+      <span>17 issues · 3 priority levels</span>
+    </div>
+    <dl class="scope">
+      <div><dt>Reviewed</dt><dd>Homepage, all Owners and Tenants pages, About, all 6 pages of rental listings, both pages of the Articles index.</dd></div>
+      <div><dt>Not reviewed</dt><dd>Individual listing pages, individual articles, Privacy Policy, Terms of Use, PDF forms.</dd></div>
+      <div><dt>Could not review</dt><dd>The Contact page, which blocks automated access.</dd></div>
+    </dl>
+  </header>
+
+  <div class="stats" aria-label="Key numbers">
+    <div class="stat"><b>46</b><span>unique rental listings online</span></div>
+    <div class="stat"><b>3</b><span>with an availability date after Oct 11, 2026</span></div>
+    <div class="stat"><b>11</b><span>articles published</span></div>
+    <div class="stat"><b>Sep 2024</b><span>date of newest article</span></div>
+  </div>
+
+  <section>
+    <h2>What's working well</h2>
+    <ul class="list strengths">
+      <li><div><strong>Clear audience split.</strong> Separate Owners and Tenants sections make it easy for each visitor to find their path.</div></li>
+      <li><div><strong>Transparent pricing.</strong> Publishing fees on "How We Help Owners" builds trust. Many competitors hide their pricing.</div></li>
+      <li><div><strong>Credibility signals.</strong> BCFSA and PAMA logos, a team page with photos and bios, and a physical Broadway office address.</div></li>
+      <li><div><strong>Useful tenant content.</strong> The showing-preparation tips and FAQ answers are practical.</div></li>
+      <li><div><strong>Consistent listing format.</strong> Every listing shows the same key facts: price, beds, baths, pets, parking, size and availability.</div></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Issues found</h2>
+    <div class="progress">
+      <span id="progress-label">0 of 17 marked fixed</span>
+      <div class="bar" aria-hidden="true"><i id="progress-bar"></i></div>
+    </div>
+    <p class="muted" style="font-size:0.88rem">Tick an issue once it's fixed. Ticks are saved in your own browser only.</p>
+
+    <div class="group">
+      <div class="group-head"><span class="pill high">High priority</span><span class="muted" style="font-size:0.9rem">Outdated or conflicting information</span></div>
+
+      <div class="issue" data-sev="high" data-id="1">
+        <span class="n">01</span>
+        <div class="body">
+          <h3>Rent increase figures are out of date and don't match each other</h3>
+          <ul>
+            <li>The Owners FAQ quotes the <strong>2020</strong> maximum (2.6%).</li>
+            <li>The Tenants FAQ quotes the <strong>2023</strong> maximum (2.0%).</li>
+            <li>Both should show the current year's figure, or link to the RTB page instead of stating a number.</li>
+          </ul>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-1"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="high" data-id="2">
+        <span class="n">02</span>
+        <div class="body">
+          <h3>Rented listings are hard to tell apart from available ones</h3>
+          <p>About 46 listings are online. Only 3 have an availability date after the review date: 930 Cambie, 5477 Wales Street and 1631 Dunbar Street, all November 1, 2026. The rest show past dates, some from 2020–2022.</p>
+          <ul>
+            <li>The listing editor in WordPress has a "Rented" toggle. It places a small white "RENTED" label in the bottom-left corner of the listing photo.</li>
+            <li>That label is an image file (<code>rented.png</code>) with <strong>no alt text</strong>. The word "Rented" doesn't appear in the page's text, so search engines and screen readers can't tell the home is rented.</li>
+            <li>The label is small and sits in a corner of a busy photo, so visitors can easily miss it.</li>
+            <li>The sign also appears on the listing cards. But the cards' text never says "Rented": the <strong>Available</strong> row still shows a date (e.g. August 1, 2022 on 1618 Quebec Street), which can read as "available from" even when the photo says rented. Rented homes stay in the main listings alongside available ones.</li>
+            <li><strong>Fix:</strong> add alt text to the image in the theme template: <code>&lt;img class="rented" src="…/rented.png" alt="Rented"&gt;</code></li>
+            <li><strong>Update the Available field:</strong> when the Rented toggle is on, show "Rented" in the Available row instead of the date, on both the cards and the listing page. The field may currently accept only a date, so this would be a small change in the theme template (if the toggle is on, show "Rented"; otherwise show the date) rather than something staff enter by hand.</li>
+            <li><strong>Make it easier to see:</strong> enlarge <code>rented.png</code> (a bigger version of the image, or a larger display size in the theme's CSS) so visitors notice it.</li>
+            <li><strong>Also worth doing:</strong> have the same toggle add "(Rented)" to the page title and meta description, move rented homes out of the main listings or sort them last, and remove them from the XML sitemap.</li>
+          </ul>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-2"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="high" data-id="3">
+        <span class="n">03</span>
+        <div class="body">
+          <h3>Duplicate listings</h3>
+          <p>1483 King Edward, 3996 Dumfries Street and 308 Morrissey Road each appear on both page 2 and page 3 of the listings.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-3"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="high" data-id="4">
+        <span class="n">04</span>
+        <div class="body">
+          <h3>Featured listing wording</h3>
+          <p>The 930 Cambie description says the pool and gym are "currently open by appointment only." If that is a leftover COVID-era restriction, it should be updated. The review can't confirm whether it still applies.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-4"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="high" data-id="5">
+        <span class="n">05</span>
+        <div class="body">
+          <h3>Bio inconsistency</h3>
+          <p>Amanda's bio says "20 years of experience" but also says she started as a Realtor in the mid-80s. Please check which is accurate.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-5"> Fixed</label>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><span class="pill med">Medium priority</span><span class="muted" style="font-size:0.9rem">Content gaps and quality</span></div>
+
+      <div class="issue" data-sev="med" data-id="6">
+        <span class="n">06</span>
+        <div class="body">
+          <h3>"PCA" is never explained</h3>
+          <p>The Owners page invites people to "ask about our exclusive PCA" but doesn't say what it is.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-6"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="med" data-id="7">
+        <span class="n">07</span>
+        <div class="body">
+          <h3>Tenant guarantee isn't described</h3>
+          <p>It's mentioned twice on the Owners page with no details.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-7"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="med" data-id="8">
+        <span class="n">08</span>
+        <div class="body">
+          <h3>No new articles since September 2024</h3>
+          <p>The newest of the 11 articles is over two years old. Most are from 2020.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-8"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="med" data-id="9">
+        <span class="n">09</span>
+        <div class="body">
+          <h3>Spelling errors in listings</h3>
+          <p>"Vancovuer" on 1483 King Edward and "Vanocuver" on 1989 Dunbar Street.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-9"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="med" data-id="10">
+        <span class="n">10</span>
+        <div class="body">
+          <h3>Inconsistent listing formatting</h3>
+          <ul>
+            <li>Prices appear as "$3195", "$3,195" and "$4,495.00".</li>
+            <li>Some prices have no "/ Month".</li>
+            <li>Minimum stay appears as "1", "1 Year" and "1 year".</li>
+            <li>Some fields are blank, such as parking and community.</li>
+          </ul>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-10"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="med" data-id="11">
+        <span class="n">11</span>
+        <div class="body">
+          <h3>Two different rental application PDFs</h3>
+          <p>One from 2025 is linked on the homepage and one from 2024 on the Tenants FAQ. Visitors may fill out the wrong one.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-11"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="med" data-id="12">
+        <span class="n">12</span>
+        <div class="body">
+          <h3>The legal business name may contain a typo</h3>
+          <p>The About page says "Alwynds Real Estate and Property Managements Services Ltd." Please check "Managements".</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-12"> Fixed</label>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-head"><span class="pill low">Low priority</span><span class="muted" style="font-size:0.9rem">Technical and housekeeping</span></div>
+
+      <div class="issue" data-sev="low" data-id="13">
+        <span class="n">13</span>
+        <div class="body">
+          <h3>LinkedIn link is broken on some pages</h3>
+          <p>It points to linkedin.com instead of your company page on Our Owners, How We Help Owners and Articles.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-13"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="low" data-id="14">
+        <span class="n">14</span>
+        <div class="body">
+          <h3>Placeholder web addresses on older articles</h3>
+          <p><code>/article-title-1/</code>, <code>/article-title-2/</code> and <code>/article-name-007/</code>. Descriptive addresses help search engines and sharing.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-14"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="low" data-id="15">
+        <span class="n">15</span>
+        <div class="body">
+          <h3>Owners FAQ links to a different contact address</h3>
+          <p>It links to <code>/contact</code> while the menu uses <code>/contact-us/</code>. Whether <code>/contact</code> works was not checked.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-15"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="low" data-id="16">
+        <span class="n">16</span>
+        <div class="body">
+          <h3>Articles list is slightly out of date order</h3>
+          <p>The February 28, 2020 article is listed after a February 17, 2020 article.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-16"> Fixed</label>
+      </div>
+
+      <div class="issue" data-sev="low" data-id="17">
+        <span class="n">17</span>
+        <div class="body">
+          <h3>The Contact page blocks automated tools</h3>
+          <p>That's fine for privacy, but if it's unintentional it may also affect some search or accessibility tools. The review can't tell whether it was intentional.</p>
+        </div>
+        <label class="done"><input type="checkbox" id="fix-17"> Fixed</label>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Suggestions for the new site</h2>
+    <ul class="list suggest">
+      <li>Build on the existing <strong>Rented toggle</strong>: keep the <code>rented.png</code> badge with alt text, and use the toggle to hide or archive rented listings automatically.</li>
+      <li>Add <strong>listing filters</strong> for city, price, bedrooms, pets and type.</li>
+      <li>Use one <strong>rental application</strong>, ideally an online form, and link it everywhere.</li>
+      <li>Explain <strong>PCA</strong> and the <strong>tenant guarantee</strong> on the Owners page.</li>
+      <li>Replace hard-coded legal figures with links to official sources, or set a yearly reminder to update them.</li>
+      <li>Keep the transparent pricing table. It's a strength.</li>
+      <li>Plan a simple <strong>article schedule</strong>, even a few posts a year, to keep the site current.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Questions for you</h2>
+    <ol class="list questions">
+      <li><span>What does PCA stand for, and what's included?</span></li>
+      <li><span>What are the terms of the tenant guarantee?</span></li>
+      <li><span>Which of the past-dated listings are rented and can be removed? Is the Rented toggle switched on for all of them?</span></li>
+      <li><span>Is the 930 Cambie pool and gym note still accurate?</span></li>
+      <li><span>Which figure in Amanda's bio is correct?</span></li>
+      <li><span>Which rental application form is current?</span></li>
+    </ol>
+  </section>
+
+  <footer>
+    <span>Based on the public pages of alwynds.com as they appeared on October 11, 2026.</span>
+    <span>Items the review could not see are stated as such rather than assumed.</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var KEY = "alwynds-review-fixed";
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { saved = {}; }
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.issue input[type="checkbox"]'));
+  var label = document.getElementById("progress-label");
+  var bar = document.getElementById("progress-bar");
+  function update() {
+    var n = 0;
+    boxes.forEach(function (b) {
+      var card = b.closest(".issue");
+      card.classList.toggle("is-done", b.checked);
+      if (b.checked) n++;
+    });
+    label.textContent = n + " of " + boxes.length + " marked fixed";
+    bar.style.width = (n / boxes.length * 100) + "%";
+  }
+  boxes.forEach(function (b) {
+    var id = b.closest(".issue").getAttribute("data-id");
+    if (saved[id]) b.checked = true;
+    b.addEventListener("change", function () {
+      saved[id] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+      update();
+    });
+  });
+  update();
+})();
+</script>
+
+</body></html>
